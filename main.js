@@ -16,11 +16,18 @@ const API_URL = 'https://icanhazdadjoke.com/';
 function tellJoke() {
     fetch(`${API_URL}`, {
         method: 'GET',
-        headers: { accept: 'application/json' }
+        headers: { Accept: 'application/json' }
     })
         .then((response) => response.json())
         .then((data) => {
         console.log(data.joke);
-        data;
+        console.log(typeof data.joke);
+        // data;
+        printJoke(data.joke);
     });
+}
+function printJoke(joke) {
+    // Añadir '!' a final de línea para evitar error "el objeto es posiblemente null .ts(2531)"
+    const print = document.getElementById('printJoke');
+    print.innerHTML = `${joke}`;
 }
