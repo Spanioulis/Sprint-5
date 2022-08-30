@@ -1,7 +1,12 @@
 const API_URL: string = 'https://icanhazdadjoke.com/';
+const API_KEY = 'db6704c5b9ee311d621bc22c515c13a6';
+const API_WEATHER = `https://api.openweathermap.org/data/2.5/weather?q=Barcelona&appid=${API_KEY}`;
 let firstJoke: string;
 let result: number;
 let form = document.querySelector('#formulario');
+
+//* AHORA FUNCIONA
+// TODO: Quitar 'TypeError: Cannot...'
 
 function tellJoke() {
     fetch(`${API_URL}`, {
@@ -61,5 +66,44 @@ function newJoke() {
     }
     // Limpiar formulario
     form.reset();
-    // result = 0;
+    result = 0;
+}
+
+function getWeather() {
+    // Consultar API
+    fetch(API_WEATHER)
+        // Obtener respuesta
+        .then((respuesta) => respuesta.json())
+        // Obtener datos
+        .then((datos) => {
+            // TODO: Añadir Snipper mientras sale Info 'weather'
+            // Mostrar datos
+            showWeather(datos);
+        });
+}
+
+function kelvinToCelsius(t: number) {
+    // Convertir a grados Celsius (número con 2 decimales)
+    return +(t - 273.15).toFixed(2);
+}
+
+function showWeather(datos: any) {
+    //  Extraer datos de 'temperaturas' y 'clima'
+    const {
+        weather: {
+            0: { description }
+        },
+        main: { temp, temp_max, temp_min }
+    } = datos;
+    const actualTemp = kelvinToCelsius(temp);
+    const maxTemp = kelvinToCelsius(temp_max);
+    const minTemp = kelvinToCelsius(temp_min);
+    console.log(actualTemp);
+
+    const content = document.querySelector('.weather')!;
+    content.innerHTML = `
+    <p>Good morning Barcelona - Weather: ${description}</p>
+    <p>Actual temp: ${actualTemp} &#8451</p>
+    <p>(max: ${maxTemp} &#8451 - min: ${minTemp} &#8451)</p>
+    `;
 }

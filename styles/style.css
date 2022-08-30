@@ -27,19 +27,27 @@ body:before {
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
     /* margin-top: 250px; Cambiar cuando esté ya creado para verlo en el centro de la pantalla */
-    margin-top: 75px;
+    margin-top: 15px;
 
+}
+
+.weather {
+    font-size: 0.9rem;
+    margin: 0 2rem 1rem 0;
+    text-align: center;
+    align-self: flex-end;
 }
 
 .row {
     background-color: rgba(116, 167, 219, 0.8) !important;
     box-shadow: 10px 10px 10px rgba(192, 190, 190, 0.7);
     border-radius: 15px;
-    max-width: 750px;
+    width: 600px;
     /* opacity: 0.9; */
 }
 
