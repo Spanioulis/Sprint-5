@@ -2,13 +2,110 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 body {
-    color: bisque;
-    background-color: blueviolet;
+    background: url(../images/laugh.jpg);
+    background-size: cover;
+    background-position: initial;
+    background-attachment: fixed;
+}
+
+/* Degradado transparente imagen fondo */
+body:before {
+    content: "";
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    background: linear-gradient(white, white);
+    opacity: 0.6;
+    /* La imagen pasa a estar detrás del .container */
+    z-index: -1;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    /* margin-top: 250px; Cambiar cuando esté ya creado para verlo en el centro de la pantalla */
+    margin-top: 75px;
+
+}
+
+.row {
+    background-color: rgba(116, 167, 219, 0.8) !important;
+    box-shadow: 10px 10px 10px rgba(192, 190, 190, 0.7);
+    border-radius: 15px;
+    max-width: 750px;
+    /* opacity: 0.9; */
+}
+
+.title {
+    margin: 1.2rem 0 1.2rem 0;
+    padding: 0 1.2rem 0 1.2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.joke {
+    margin-bottom: 1.5rem;
+    padding: 0 1.2rem 0 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.question {
+    margin: 0 1.2rem 1rem 1.2rem;
+    font-size: 0.9rem;
+}
+
+#error {
+    color: rgb(192, 12, 12);
+    margin: 0 1.2rem 1rem 1.2rem;
+    font-size: 0.9rem;
+}
+
+#formulario {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 1.2rem 1rem 1.2rem;
+    font-size: 1rem;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
 }
 
 .btn {
-    border-radius: 10px;
+    background-color: rgb(168, 168, 168) !important;
+    border-radius: 5px;
+    border: 0.1px rgba(26, 6, 71, 0.7) solid;
+    height: 40px;
+    width: 150px;
+    margin-bottom: 0.8rem;
+
+}
+
+@media (max-width: 800px) {
+    .row {
+        margin: 2rem;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    h3 {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 450px) {
+    #formulario {
+        font-size: 0.8rem;
+    }
 }

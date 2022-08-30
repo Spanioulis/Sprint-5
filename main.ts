@@ -1,19 +1,7 @@
-/* 
-- En prémer el botó de “Següent acudit” es farà fetch a l'API d'acudits i es mostrarà per consola l'acudit en qüestió
-*/
-
-/* 
-
-- La documentació de l'API a consumir és la següent:
-
-https://icanhazdadjoke.com/api
-
-- Crida per a obtenir un acudit:
-
-https://icanhazdadjoke.com/
-*/
-
 const API_URL: string = 'https://icanhazdadjoke.com/';
+let firstJoke: string;
+let result: number;
+let form = document.querySelector('#formulario');
 
 function tellJoke() {
     fetch(`${API_URL}`, {
@@ -22,15 +10,56 @@ function tellJoke() {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data.joke);
-            console.log(typeof data.joke);
-            // data;
-            printJoke(data.joke);
+            // Guardar datos en variable
+            firstJoke = data.joke;
+
+            // Mostrar en DOM primer 'joke' cargado automáticamente
+            const content = document.querySelector('.joke')!;
+            content.innerHTML = `${data.joke}`;
         });
 }
 
-function printJoke(joke: string) {
-    // Añadir '!' a final de línea para evitar error "el objeto es posiblemente null .ts(2531)"
-    const print = document.getElementById('printJoke')!;
-    print.innerHTML = `${joke}`;
+const reportJokes: object[] = [];
+
+function saveScore(score: number) {
+    result = score;
+    console.log(result);
+}
+
+function newJoke() {
+    // Mostrar mensaje de 'error' si no se ha puntuado el chiste
+    if (result === undefined || result === 0) {
+        console.log(result);
+        const alerta = document.querySelector('#error')!;
+        alerta.innerHTML = 'Si no puntúa el chiste, nuestro bot pierde su gracia :S';
+
+        // Eliminar mensaje de error al cabo de 3 segundos
+        setTimeout(() => {
+            alerta.remove();
+        }, 3000);
+        return;
+    } else {
+        const date = new Date();
+        // Convertir fecha a 'ISOString'
+        const dateString = date.toISOString();
+        const reportAcudits = {
+            joke: firstJoke,
+            score: result,
+            fecha: dateString
+        };
+
+        // Mostrar nuevo 'joke' visualizado y puntuado
+        console.log(reportAcudits);
+
+        // Añadir nuevo 'joke' a array conjunta
+        reportJokes.push(reportAcudits);
+
+        // Mostrar todos los 'jokes' visualizados y puntuados
+        console.log(reportJokes);
+
+        tellJoke();
+    }
+    // Limpiar formulario
+    form.reset();
+    // result = 0;
 }

@@ -6,25 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style.css">
+    <script src="https://kit.fontawesome.com/1f7d93c302.js" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"> -->
 
     <title>Sprint 5 - IT Academy</title>
 </head>
 
-<body>
+<body onload="tellJoke()">
     <main class="container">
         <div class="row">
             <h3 class="title" id="title">
-                ¿Preparado para reírte y empezar bien el día?
+                ¿Preparado para reírte y empezar bien el día? <i class="fa-solid fa-face-expressionless"></i>
             </h3>
 
-            <div class="joke" id="printJoke">
-                chiste
-            </div>
+            <div class="joke" id="printJoke"></div>
+
+            <div class="question">¿Qué te ha parecido el chiste? Puntúalo:</div>
+            <div id="error"></div>
+            <!-- <input type="number" id="number"> -->
+
+            <form action="" id="formulario">
+                <!--! El valor lo da el name -->
+                <!-- onclick="scoreResult() -->
+                <label for="normal"> <input type="radio" id="normal" value="1" name="score" onclick="saveScore(1)">
+                    Normal <i class=" fa-solid fa-face-flushed"></i>
+                </label>
+
+                <label for="good"> <input type="radio" id="good" value="2" name="score" onclick="saveScore(2)"> Bueno
+                    <i class="fa-solid fa-face-grin-squint"></i></label>
+
+                <label for="excellent"> <input type="radio" id="excellent" value="3" name="score"
+                        onclick="saveScore(3)">
+                    ¡Excelente! <i class="fa-solid fa-face-grin-tears"></i></label>
+                <div id="message"></div>
+            </form>
 
             <div class="button">
-                <button class="btn" type="button" onclick="tellJoke()">Siguiente chiste -></button>
+                <button class="btn" type="submit" onclick="newJoke()">Siguiente chiste -></button>
             </div>
+
         </div>
     </main>
 
