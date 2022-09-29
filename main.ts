@@ -5,10 +5,7 @@ let firstJoke: string;
 let result: number;
 let form = document.querySelector('#formulario');
 
-//* AHORA FUNCIONA
-// TODO: Quitar 'TypeError: Cannot...'
-
-function tellJoke() {
+function getJoke() {
     fetch(`${API_URL}`, {
         method: 'GET',
         headers: { Accept: 'application/json' }
@@ -28,16 +25,13 @@ const reportJokes: object[] = [];
 
 function saveScore(score: number) {
     result = score;
-    console.log(result);
 }
 
 function newJoke() {
     // Mostrar mensaje de 'error' si no se ha puntuado el chiste
     if (result === undefined || result === 0) {
-        console.log(result);
         const alerta = document.querySelector('#error')!;
         alerta.innerHTML = 'Si no puntúa el chiste, nuestro bot pierde su gracia :S';
-
         // Eliminar mensaje de error al cabo de 3 segundos
         setTimeout(() => {
             alerta.remove();
@@ -52,17 +46,10 @@ function newJoke() {
             score: result,
             fecha: dateString
         };
-
-        // Mostrar nuevo 'joke' visualizado y puntuado
-        console.log(reportAcudits);
-
         // Añadir nuevo 'joke' a array conjunta
         reportJokes.push(reportAcudits);
 
-        // Mostrar todos los 'jokes' visualizados y puntuados
-        console.log(reportJokes);
-
-        tellJoke();
+        getJoke();
     }
     // Limpiar formulario
     form.reset();
@@ -98,8 +85,6 @@ function showWeather(datos: any) {
     const actualTemp = kelvinToCelsius(temp);
     const maxTemp = kelvinToCelsius(temp_max);
     const minTemp = kelvinToCelsius(temp_min);
-    console.log(actualTemp);
-
     const content = document.querySelector('.weather')!;
     content.innerHTML = `
     <p>Good morning Barcelona - Weather: ${description}</p>
